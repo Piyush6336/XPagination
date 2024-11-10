@@ -26,7 +26,7 @@ function App() {
         setRoles(roles);
       }
     } catch (error) {
-      console.log("failed to fetch data");
+      alert("failed to fetch data");
     }
   }
   useEffect(()=>{
