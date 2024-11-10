@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import Table from "./component/table";
 
 function App() {
+
+  // const[data,setData]=useState([]);
+  const [ids, setIds] = useState([]);
+  const [names, setNames] = useState([]);
+  const [emails, setEmails] = useState([]);
+  const [roles, setRoles] = useState([]);
+  let API_ENDPOINT='https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json';
+  const fetchData=async()=>{
+    try {
+      const response=await fetch(API_ENDPOINT);
+      if(response.ok){
+        const result=await response.json();
+        // setData(result);
+        const ids = result.map(item => item.id);
+        const names = result.map(item => item.name);
+        const emails = result.map(item => item.email);
+        const roles = result.map(item => item.role);
+        
+        setIds(ids);
+        setNames(names);
+        setEmails(emails);
+        setRoles(roles);
+      }
+    } catch (error) {
+      console.log("failed to fetch data");
+    }
+  }
+  useEffect(()=>{
+    fetchData();
+  },[]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Table ids={ids} names={names} emails={emails} roles={roles}/>
+    </>
   );
 }
 
