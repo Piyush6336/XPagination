@@ -28,7 +28,7 @@ function App() {
         alert("failed to fetch data");
       }
     } catch (error) {
-      alert("failed to fetch data",error);
+      alert("failed to fetch data");
     }
   }
   useEffect(()=>{
