@@ -24,9 +24,11 @@ function App() {
         setNames(names);
         setEmails(emails);
         setRoles(roles);
+      }else{
+        alert("failed to fetch data");
       }
     } catch (error) {
-      alert("failed to fetch data");
+      alert("failed to fetch data",error);
     }
   }
   useEffect(()=>{
